@@ -1,0 +1,9 @@
+@use './base.scss';
+@use './mixins.scss';
+@use './variables.scss';
+
+@use './components/heroSection.scss';
+@use './components/movieDetailModal.scss';
+@use './components/pagination.scss';
+@use './components/popularSection.scss';
+@use './components/trending.scss';
