@@ -1,0 +1,45 @@
+@use './variables.scss' as *;
+@use './mixins.scss' as *;
+
+#root {
+    background-color: $black-3;
+    width: 100%;
+}
+
+.text-d-gray-1 {
+    color: $dark-gray-1;
+}
+
+.text-l-purple-1 {
+    color: $light-purple-1;
+}
+
+
+// Home Page
+.home-container {
+    background-color: $black-3;
+
+    .home-hero-section {
+        background-image: url('../images/common/hero-bg.png');
+    }
+}
+
+
+// Common Component Styles
+.popular-container,
+.trending-container {
+    .title {
+        @include font-properties(30px, 'DM Sans', 700);
+    }
+}
+
+.hero-section-container .hero-search-input,
+.pagination-container .pagination-arrow-btn,
+.movie-modal {
+    backdrop-filter: blur(16px);
+    box-shadow: inset 0 0 0 2px $light-gray-opacity-1;
+}
+
+.hero-title .hero-title-color, .movie-modal .visit-homepg-btn {
+    background: linear-gradient($light-purple-1, $dark-purple-1);
+}
