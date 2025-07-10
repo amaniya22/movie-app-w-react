@@ -1,0 +1,15 @@
+@use '../mixins.scss' as *;
+@use '../variables.scss' as *;
+
+.trending-container {
+    .trend-content {
+        @include gridlayout(repeat(6, 1fr));
+
+        .content-number {
+            color: $dark-gray-opacity-1;
+            @include font-properties(140px, 'DM Sans', 900);
+            stroke: $dark-gray-opacity-2;
+            -webkit-text-stroke: 2px $dark-gray-opacity-2;
+        }
+    }
+}

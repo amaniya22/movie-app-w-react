@@ -1,0 +1,55 @@
+@use '../variables.scss' as *;
+@use '../mixins.scss' as *;
+
+.movie-modal {
+    border-radius: 8px;
+    padding-bottom: 0;
+
+    .ant-modal-content {
+        background-color: $black-2;
+        padding: 50px;
+
+        .movie-detail-label {
+            @include font-properties(16px, 'DM Sans', 400);
+            width: 150px;
+        }
+
+        .movie-detail-value {
+            @include font-properties(14px, 'DM Sans', 400);
+            line-height: 175%;
+        }
+
+        .movie-genre {
+            background-color: $black-4;
+            color: $white;
+            font-weight: 600 !important;
+            height: 35px;
+        }
+
+        .movie-insights,
+        .movie-meta,
+        .movie-rating {
+            @include font-properties(14px, 'DM Sans', 400);
+        }
+
+        .movie-info-div {
+            background-color: $black-4;
+        }
+
+        .movie-title {
+            @include font-properties(28px, 'DM Sans', 700);
+        }
+
+        .visit-homepg-btn {
+            border: 0;
+            @include font-properties(14px, 'DM Sans', 600);
+            height: 44px;
+            padding: 14px 25px;
+
+            &:hover {
+                background: linear-gradient($light-purple-1, $dark-purple-1);
+                color: $black-3;
+            }
+        }
+    }
+}

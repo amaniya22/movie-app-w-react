@@ -1,0 +1,22 @@
+@use '../mixins.scss' as *;
+@use '../variables.scss' as *;
+
+.popular-container {
+    .popular-content {
+        @include gridlayout(repeat(4, 1fr));
+
+        .movie-card {
+            background-color: $black-2;
+
+            .movie-title,
+            .rating-txt {
+                @include font-properties(16px, 'DM Sans', 700);
+            }
+
+            .sub-txt {
+                color: $dark-gray-2;
+                @include font-properties(16px, 'DM Sans', 500);
+            }
+        }
+    }
+}

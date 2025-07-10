@@ -1,0 +1,30 @@
+@use '../mixins.scss' as *;
+@use '../variables.scss' as *;
+
+.hero-section-container {
+    .hero-search-input {
+        background-color: $black-2;
+        border: 0;
+        padding: 20px;
+        width: 640px;
+
+        .ant-input {
+            color: $dark-gray-1;
+            @include font-properties(16px, 'DM Sans', 400);
+
+            &::placeholder {
+                color: $dark-gray-1;
+            }
+        }
+    }
+
+    .hero-title {
+        @include font-properties(56px, 'DM Sans', 700);
+
+        .hero-title-color {
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}

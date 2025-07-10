@@ -1,0 +1,13 @@
+@use '../variables.scss' as *;
+@use '../mixins.scss' as *;
+
+.pagination-container {
+    .pagination-arrow-btn {
+        background-color: $black-2;
+    }
+
+    .pagination-text {
+        @include font-properties(20px, 'DM Sans', 700);
+        color: $dark-gray-2;
+    }
+}
