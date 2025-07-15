@@ -7,6 +7,7 @@ import { siteImages } from "../assets/images";
 import { Input } from "antd";
 import { useDebounce } from "react-use";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { updateSearchCount } from "../appwrite";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -41,7 +42,6 @@ const Home = () => {
           : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
         const response = await fetch(endpoint, API_OPTIONS);
-        console.log(response);
 
         if (!response.ok) {
           throw new Error("Failed to fetch movies");
@@ -56,6 +56,8 @@ const Home = () => {
         }
 
         setMovieList(data.results || []);
+
+        updateSearchCount();
 
         if (query && data.results.length === 0) {
           setErrorMessage("No movies found for your search");
