@@ -47,6 +47,14 @@
     .title {
         @include font-properties(30px, 'DM Sans', 700);
     }
+
+    @include respond-to(xs) {
+        padding: 0 32px;
+    }
+
+    @include respond-to(md) {
+        padding: 0 32px;
+    }
 }
 
 .hero-section-container .hero-search-input,

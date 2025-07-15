@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import HeroSection from "../components/heroSection";
 import Trending from "../components/trending";
-import { movieTrends } from "../constants/movieData";
 import PopularSection from "../components/popularSection";
 import { siteImages } from "../assets/images";
 import { Input } from "antd";
 import { useDebounce } from "react-use";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { getTrendingMovies, updateSearchCount } from "../appwrite";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -27,50 +27,49 @@ const Home = () => {
   const [genresList, setGenresList] = useState([]);
   const [searchMovie, setSearchMovie] = useState("");
   const [debounceSearch, setDebounceSearch] = useState("");
+  const [trendingMovies, setTrendingMovies] = useState([]);
 
   useDebounce(() => setDebounceSearch(searchMovie), 500, [searchMovie]);
 
-  const fetchMovieData = useCallback(
-    async (query = "") => {
-      setIsLoading(true);
-      setErrorMessage("");
+  const fetchMovieData = useCallback(async (query = "") => {
+    setIsLoading(true);
+    setErrorMessage("");
 
-      try {
-        const endpoint = query
-          ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-          : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+    try {
+      const endpoint = query
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
+        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
-        const response = await fetch(endpoint, API_OPTIONS);
-        console.log(response);
+      const response = await fetch(endpoint, API_OPTIONS);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch movies");
-        }
-
-        const data = await response.json();
-
-        if (data.response === "False") {
-          setErrorMessage(data.error || "Failed to fetch movies");
-          setMovieList([]);
-          return;
-        }
-
-        setMovieList(data.results || []);
-
-        if (query && data.results.length === 0) {
-          setErrorMessage("No movies found for your search");
-        } else {
-          setErrorMessage("");
-        }
-      } catch (error) {
-        console.error("Error fetching movie data:", error);
-        setErrorMessage(error.message || "An error occurred");
-      } finally {
-        setIsLoading(false);
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies");
       }
-    },
-    []
-  );
+
+      const data = await response.json();
+
+      if (data.response === "False") {
+        setErrorMessage(data.error || "Failed to fetch movies");
+        setMovieList([]);
+        return;
+      }
+
+      setMovieList(data.results || []);
+
+      if (query && data.results.length === 0) {
+        setErrorMessage("No movies found for your search");
+      }
+
+      if (query && data.results.length > 0) {
+        await updateSearchCount(query, data.results[0]);
+      }
+    } catch (error) {
+      console.error("Error fetching movie data:", error);
+      setErrorMessage(error.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   const fetchGenres = async () => {
     try {
@@ -91,9 +90,19 @@ const Home = () => {
     }
   };
 
+  const fetchTrendingMovies = async () => {
+    try {
+      const trendingMoviesList = await getTrendingMovies();
+      setTrendingMovies(trendingMoviesList);
+    } catch (error) {
+      console.error("Error fetching trending movies:", error);
+    }
+  };
+
   useEffect(() => {
     fetchGenres();
-  }, [])
+    fetchTrendingMovies();
+  }, []);
 
   useEffect(() => {
     fetchMovieData(debounceSearch);
@@ -119,11 +128,25 @@ const Home = () => {
         />
       </div>
 
-      <Trending trendMovies={movieTrends} />
+      <div className="trending-container px-20">
+        <p className="title text-white">Trending</p>
+        <div className="trend-content flex mb-14 gap-12">
+          {trendingMovies.map((movie, index) => {
+            const trendNUm = index + 1;
+            console.log(trendNUm)
+
+            return (
+              <React.Fragment key={index}>
+                <Trending trendMovies={movie} number={trendNUm} />
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
 
       <div className="popular-container px-20">
         <p className="title text-white mb-7">All Movies</p>
-        <div className="flex flex-wrap justify-between gap-6 mb-8">
+        <div className="flex flex-wrap justify-between mb-8 movie-section gap-y-4">
           {isLoading ? (
             <div className="loading-spinner m-auto">
               <LoadingSpinner />

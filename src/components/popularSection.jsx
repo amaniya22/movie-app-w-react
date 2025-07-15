@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { siteImages } from "../assets/images";
 import Pagination from "./pagination";
 import MovieDetailModal from "./movieDetailModal";
+import { Tooltip } from "antd";
 
 const PopularSection = ({
   popularMovies: {
@@ -52,7 +53,11 @@ const PopularSection = ({
           alt={`${title} poster`}
           className="mb-3 rounded-lg"
         />
-        <p className="movie-title text-white mb-3">{title}</p>
+        <Tooltip title={title} arrow={false}>
+          <p className="movie-title text-white mb-3 text-ellipsis overflow-hidden whitespace-nowrap">
+            {title}
+          </p>
+        </Tooltip>
         <div className="flex">
           <img
             src={siteImages.Icons.StarIcon}
