@@ -16,4 +16,18 @@
             @include font-properties(16px, 'DM Sans', 500);
         }
     }
+
+    .movie-section {
+        @include respond-to(xs) {
+            flex-direction: column;
+
+            .movie-card {
+                width: 100%;
+            }
+        }
+
+        @include respond-to(md) {
+            flex-direction: row;
+        }
+    }
 }
