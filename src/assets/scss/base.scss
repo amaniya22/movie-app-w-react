@@ -21,6 +21,22 @@
 
     .home-hero-section {
         background-image: url('../images/common/hero-bg.png');
+
+        .hero-search-input {
+            background-color: $black-2;
+            border: 0;
+            padding: 20px;
+            width: 50%;
+    
+            .ant-input {
+                color: $dark-gray-1;
+                @include font-properties(16px, 'DM Sans', 400);
+    
+                &::placeholder {
+                    color: $dark-gray-1;
+                }
+            }
+        }
     }
 }
 
@@ -30,6 +46,14 @@
 .trending-container {
     .title {
         @include font-properties(30px, 'DM Sans', 700);
+    }
+
+    @include respond-to(xs) {
+        padding: 0 32px;
+    }
+
+    @include respond-to(md) {
+        padding: 0 32px;
     }
 }
 

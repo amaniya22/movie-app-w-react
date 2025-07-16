@@ -2,60 +2,91 @@ import React, { useState } from "react";
 import { siteImages } from "../assets/images";
 import Pagination from "./pagination";
 import MovieDetailModal from "./movieDetailModal";
+import { Tooltip } from "antd";
 
-const PopularSection = ({ popularMovies }) => {
+const PopularSection = ({
+  popularMovies: {
+    title,
+    release_date,
+    adult,
+    original_language,
+    vote_average,
+    vote_count,
+    poster_path,
+    backdrop_path,
+    genre_ids = [],
+    overview,
+  },
+  genresList,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [clickedMovie, setClickedMovie] = useState(null);
+  const [clickedMovie, setClickedMovie] = useState([]);
 
-  const showModal = () => {
+  const handleClick = () => {
     setIsModalOpen(true);
+    setClickedMovie({
+      title,
+      release_date,
+      adult,
+      original_language,
+      vote_average,
+      vote_count,
+      poster_path,
+      backdrop_path,
+      genre_ids,
+      overview,
+    });
   };
 
   return (
-    <div className="popular-container px-20">
-      <p className="title text-white mb-7">Popular</p>
-
-      <React.Fragment>
-        <div className="popular-content gap-6 mb-8">
-          {popularMovies.map((movie, index) => {
-            return (
-              <div
-                className="movie-card px-5 py-6 rounded-3xl cursor-pointer"
-                key={index}
-                onClick={showModal}
-              >
-                <img src={movie.imageUrl} alt={movie.name} className="mb-3" />
-                <p className="movie-title text-white mb-3">{movie.name}</p>
-                <div className="flex">
-                  <img
-                    src={siteImages.Icons.StarIcon}
-                    alt="star-rating"
-                    className="mr-1.5"
-                  />
-                  <p>
-                    <span className="rating-txt text-white">
-                      {movie.rating}
-                    </span>{" "}
-                    • <span className="sub-txt">{movie.category}</span> •{" "}
-                    <span className="sub-txt">{movie.type}</span>
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+    <React.Fragment>
+      <div
+        className="movie-card px-5 py-6 rounded-3xl cursor-pointer"
+        onClick={handleClick}
+      >
+        <img
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+              : "/no-movie.png"
+          }
+          alt={`${title} poster`}
+          className="mb-3 rounded-lg"
+        />
+        <Tooltip title={title} arrow={false}>
+          <p className="movie-title text-white mb-3 text-ellipsis overflow-hidden whitespace-nowrap">
+            {title}
+          </p>
+        </Tooltip>
+        <div className="flex">
+          <img
+            src={siteImages.Icons.StarIcon}
+            alt="star-rating"
+            className="mr-1.5"
+          />
+          <div>
+            <span className="rating-txt text-white">
+              {vote_average ? vote_average.toFixed(1) : "N/A"}
+            </span>
+            <span className="mx-1">•</span>
+            <span className="sub-txt">
+              {release_date ? release_date.split("-")[0] : "N/A"}
+            </span>
+            <span className="mx-1">•</span>
+            <span className="sub-txt">{original_language}</span>
+          </div>
         </div>
-
-        <Pagination currentPage={1} pageLength={5} />
-      </React.Fragment>
+      </div>
 
       <MovieDetailModal
         isModalOpen={isModalOpen}
         handleCancel={() => {
           setIsModalOpen(false);
         }}
-        // clickedMovieData={clickedMovie} // Assuming you want to show the first movie's details in the modal
+        movie={clickedMovie}
+        genresList={genresList}
       />
-    </div>
+    </React.Fragment>
   );
 };
 

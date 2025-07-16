@@ -3,13 +3,29 @@
 
 .trending-container {
     .trend-content {
-        @include gridlayout(repeat(6, 1fr));
-
         .content-number {
             color: $dark-gray-opacity-1;
             @include font-properties(140px, 'DM Sans', 900);
             stroke: $dark-gray-opacity-2;
             -webkit-text-stroke: 2px $dark-gray-opacity-2;
+        }
+
+        .trend-card {
+            &:first-of-type {
+                .movie-img {
+                    margin-left: -4px;
+                }
+            }
+        }
+
+        @include respond-to(xs) {
+            gap: 50%;
+            overflow-x: auto;
+        }
+
+        @include respond-to(md) {
+            gap: 25%;
+            overflow-x: auto;
         }
     }
 }
