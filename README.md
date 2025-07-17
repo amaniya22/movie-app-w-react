@@ -2,6 +2,8 @@
 
 ![Preview Landing](src/assets/images/screenshot.png)
 
+To view the site visit - [Movie-App-w-React](https://amaniya22.github.io/movie-app-w-react/)
+
 # 🎬 Movie Search App
 
 Find movies you’ll love without the hassle.
