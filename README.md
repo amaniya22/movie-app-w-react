@@ -1,12 +1,37 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+(src/assets/images/screenshot.png)
 
-Currently, two official plugins are available:
+# 🎬 Movie Search App
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Find movies you’ll love without the hassle.
 
-## Expanding the ESLint configuration
+Built with **ReactJS**, **Tailwind CSS**, **SCSS**, **Appwrite** for backend management, and **TMDB API** for fetching trending and searchable movie data.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Features
+
+✅ Search for movies instantly  
+✅ View trending movies based on search popularity  
+✅ Responsive and clean UI with **Tailwind CSS** and **SCSS**  
+✅ Backend search tracking using **Appwrite**  
+✅ Fetch accurate movie data using **TMDB API**
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** ReactJS, Tailwind CSS, SCSS
+- **Backend:** Appwrite
+- **API:** The Movie Database (TMDB)
+
+---
+
+## ⚡ Getting Started
+
+1️⃣ **Clone the repository:**
+```bash
+git clone https://github.com/yourusername/movie-search-app.git
+cd movie-search-app
+
