@@ -1,6 +1,6 @@
 # React + Vite
 
-[Preview](src/assets/images/screenshot.png)
+![Preview Landing](src/assets/images/screenshot.png)
 
 # 🎬 Movie Search App
 
